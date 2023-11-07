@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:providerexample/fish_model.dart';
+import 'package:providerexample/models/fish_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return ChangeNotifierProvider(
       create: (context) => FishModel(
         name: 'Salmon',
         number: 10,
@@ -263,6 +263,12 @@ class SpicyC extends StatelessWidget {
         ),
         SizedBox(
           height: 20,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Provider.of<FishModel>(context, listen: false).changeFishNumber();
+          },
+          child: Text('Change fish number'),
         ),
       ],
     );
