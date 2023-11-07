@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:providerexample/models/fish_model.dart';
+import 'package:providerexample/models/seafish_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,12 +10,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FishModel(
-        name: 'Salmon',
-        number: 10,
-        size: 'big',
-      ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => FishModel(
+            name: 'Salmon',
+            number: 10,
+            size: 'big',
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SeafishModel(
+            name: 'Tuna',
+            tunaNumber: 0,
+            size: 'middle',
+          ),
+        ),
+      ],
       child: MaterialApp(
         home: FishOrder(),
       ),
@@ -45,7 +57,7 @@ class FishOrder extends StatelessWidget {
                       text: 'Fish name: ',
                     ),
                     TextSpan(
-                      text: '${Provider.of<FishModel>(context).name}',
+                      text: Provider.of<FishModel>(context).name,
                     ),
                   ],
                 ),
@@ -117,7 +129,7 @@ class SpicyA extends StatelessWidget {
                   text: 'Fish size: ',
                 ),
                 TextSpan(
-                  text: '${Provider.of<FishModel>(context).size}',
+                  text: Provider.of<FishModel>(context).size,
                 )
               ]),
         ),
@@ -168,10 +180,10 @@ class SpicyB extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: 'Fish number: ',
+                  text: 'Tuna number: ',
                 ),
                 TextSpan(
-                  text: '${Provider.of<FishModel>(context).number}',
+                  text: '${Provider.of<SeafishModel>(context).tunaNumber}',
                 )
               ]),
         ),
@@ -184,17 +196,29 @@ class SpicyB extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: 'Fish size: ',
+                  text: 'Tuna size: ',
                 ),
                 TextSpan(
-                  text: '${Provider.of<FishModel>(context).size}',
+                  text: Provider.of<SeafishModel>(context).size,
                 )
               ]),
         ),
         SizedBox(
           height: 20,
         ),
-        Low()
+        ElevatedButton(
+          onPressed: () {
+            Provider.of<SeafishModel>(
+              context,
+              listen: false,
+            ).changeSeaFishNumber();
+          },
+          child: Text('Change tuna number'),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Low(),
       ],
     );
   }
@@ -208,7 +232,7 @@ class Low extends StatelessWidget {
     return Column(
       children: [
         Text(
-          'SpicyB is located at low place',
+          'SpicyC is located at low place',
           style: TextStyle(
             fontSize: 16,
           ),
@@ -257,7 +281,7 @@ class SpicyC extends StatelessWidget {
                   text: 'Fish size: ',
                 ),
                 TextSpan(
-                  text: '${Provider.of<FishModel>(context).size}',
+                  text: Provider.of<FishModel>(context).size,
                 )
               ]),
         ),
