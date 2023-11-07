@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:providerexample/fish_model.dart';
 
 void main() => runApp(MyApp());
 
@@ -7,36 +9,262 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // Application name
-      title: 'Flutter Hello World',
-      // Application theme data, you can set the colors for the application as
-      // you want
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Provider(
+      create: (context) => FishModel(
+        name: 'Salmon',
+        number: 10,
+        size: 'big',
       ),
-      // A widget which will be started on application startup
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      child: MaterialApp(
+        home: FishOrder(),
+      ),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({super.key, required this.title});  
+class FishOrder extends StatelessWidget {
+  const FishOrder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // The title text which will be shown on the action bar
-        title: Text(title),
-      ),
-      body: Center(
-        child: Text(
-          'Hello, World!',
+        appBar: AppBar(
+          title: Text('Fish Order'),
+          centerTitle: true,
         ),
-      ),
+        body: Center(
+          child: Column(
+            children: [
+              Text.rich(
+                TextSpan(
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Fish name: ',
+                    ),
+                    TextSpan(
+                      text: '${Provider.of<FishModel>(context).name}',
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              High()
+            ],
+          ),
+        ));
+  }
+}
+
+class High extends StatelessWidget {
+  const High({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'SpicyA is located at high place',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        SpicyA()
+      ],
+    );
+  }
+}
+
+class SpicyA extends StatelessWidget {
+  const SpicyA({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text.rich(
+          TextSpan(
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Fish number: ',
+                ),
+                TextSpan(
+                  text: '${Provider.of<FishModel>(context).number}',
+                )
+              ]),
+        ),
+        Text.rich(
+          TextSpan(
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Fish size: ',
+                ),
+                TextSpan(
+                  text: '${Provider.of<FishModel>(context).size}',
+                )
+              ]),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Middle()
+      ],
+    );
+  }
+}
+
+class Middle extends StatelessWidget {
+  const Middle({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'SpicyB is located at middle place',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        SpicyB()
+      ],
+    );
+  }
+}
+
+class SpicyB extends StatelessWidget {
+  const SpicyB({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text.rich(
+          TextSpan(
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Fish number: ',
+                ),
+                TextSpan(
+                  text: '${Provider.of<FishModel>(context).number}',
+                )
+              ]),
+        ),
+        Text.rich(
+          TextSpan(
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Fish size: ',
+                ),
+                TextSpan(
+                  text: '${Provider.of<FishModel>(context).size}',
+                )
+              ]),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Low()
+      ],
+    );
+  }
+}
+
+class Low extends StatelessWidget {
+  const Low({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text(
+          'SpicyB is located at low place',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        SpicyC()
+      ],
+    );
+  }
+}
+
+class SpicyC extends StatelessWidget {
+  const SpicyC({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Text.rich(
+          TextSpan(
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Fish number: ',
+                ),
+                TextSpan(
+                  text: '${Provider.of<FishModel>(context).number}',
+                )
+              ]),
+        ),
+        Text.rich(
+          TextSpan(
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.red,
+                fontWeight: FontWeight.bold,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Fish size: ',
+                ),
+                TextSpan(
+                  text: '${Provider.of<FishModel>(context).size}',
+                )
+              ]),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+      ],
     );
   }
 }
